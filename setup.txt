@@ -1,0 +1,6 @@
+sudo apt install conda
+conda create -p ./.signal
+conda activate ./.signal
+
+pip install -r requirements.txt
+conda install -c conda-forge jupyterlab
