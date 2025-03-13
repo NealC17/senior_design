@@ -1,5 +1,4 @@
 import numpy as np 
-from data_loader import bench, squat, deadlift
 import pandas as pd 
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
@@ -44,3 +43,26 @@ def analyze_centered_signals(rep_df, title):
     
     fig.show()
 
+
+def eye_diag(sig, interval):
+    if interval not in sig.shape:
+        sig = sig.reshape(-1, 1)
+        padding = np.zeros((128 - sig.shape[0] % 128, sig.shape[1]))
+        sig = np.concatenate([sig, padding], axis=0)
+        sig = sig.reshape(-1, interval, sig.shape[1])
+        sig = np.squeeze(sig)
+
+    fig = go.Figure()
+    for e in sig:
+        fig.add_trace(
+            go.Scatter(x=list(range(len(e))), y=e)
+        )
+    
+    fig.update_layout(
+        height=600, 
+        title="Gravity Signals Over Time",
+        xaxis_title="Time Steps",
+        hovermode="x unified", 
+    )
+    
+    fig.show()
