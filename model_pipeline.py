@@ -35,13 +35,13 @@ tf.saved_model.save(model, saved_model_dir)
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 tflite_model = converter.convert()
 
-
+name = f"{args.model_name}.tflite"
 #opening tflite model
-with open("rep_count_model.tflite", "wb") as f:
+with open(name, "wb") as f:
     f.write(tflite_model)
 
 #settings for tflite
-interpreter = tf.lite.Interpreter(model_path="rep_count_model.tflite")
+interpreter = tf.lite.Interpreter(model_path=name)
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
