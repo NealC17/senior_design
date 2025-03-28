@@ -57,3 +57,7 @@ result_df.set_index(['name', 'workout', 'set_number'], inplace=True)
 
 # Display the resulting DataFrame
 print(result_df)
+
+be = bench
+sq = squat
+de = deadlift
